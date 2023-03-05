@@ -6,3 +6,4 @@ Noen implementasjoner av kjente algoritmer i Rust, skrevet primært for å lære
 
 - Boblesortering
 - Flettesortering
+- Kvikksortering

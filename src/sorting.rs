@@ -16,6 +16,9 @@ pub fn default_unstable_sort(v: Vec<i32>) -> Vec<i32> {
 
 pub fn bubble_sort(v: Vec<i32>) -> Vec<i32> {
     let mut vec = v;
+    if vec.len() <= 1 {
+        return vec;
+    }
     let mut number_to_fix = vec.len() - 1;
     let mut current_biggest = (0, 0); //position, value
     while number_to_fix > 0 {
@@ -67,3 +70,23 @@ fn merge(l: Vec<i32>, r: Vec<i32>) -> Vec<i32> {
     vec.extend(right);
     vec
 }
+
+pub fn quicksort(v: Vec<i32>) -> Vec<i32> {
+    let vec: Vec<i32> = v;
+    if vec.len() <= 1 {
+        return vec;
+    }
+    let pivot = vec[0];
+    let mut left:Vec<i32> = Vec::new();
+    let mut right: Vec<i32> = Vec::new();
+    for i in 1..vec.len() {
+        if vec[i] < pivot {
+            left.push(vec[i]);
+        } else {
+            right.push(vec[i]);
+        }
+    }
+    left = quicksort(left);
+    right = quicksort(right);
+    left.into_iter().chain(vec![pivot]).chain(right).collect()
+} 

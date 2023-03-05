@@ -26,6 +26,11 @@ fn main() {
     print_pretty("merge sort", &merge_sorted);
 
     let sort_timer = Instant::now();
+    let quick_sorted = sorting::quicksort(vector.clone());
+    println!("quicksort spent {}ms", sort_timer.elapsed().as_millis());
+    print_pretty("quicksort", &quick_sorted);
+
+    let sort_timer = Instant::now();
     let bubble_sorted = sorting::bubble_sort(vector.clone());
     println!("bubble sort spent {}ms", sort_timer.elapsed().as_millis());
     print_pretty("bubble sort", &bubble_sorted);
