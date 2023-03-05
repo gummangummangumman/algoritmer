@@ -10,30 +10,34 @@ fn main() {
     print_pretty("unsorted", &vector);
 
     let sort_timer = Instant::now();
-    let default_sorted = sorting::default_sort(vector.clone());
+    let sorted = sorting::default_sort(vector.clone());
     println!("default sort spent {}ms", sort_timer.elapsed().as_millis());
-    print_pretty("default sort", &default_sorted);
+    print_pretty("default sort", &sorted);
 
     let sort_timer = Instant::now();
-    let default_unstable_sorted = sorting::default_unstable_sort(vector.clone());
+    let sorted = sorting::default_unstable_sort(vector.clone());
     println!("default unstable sort spent {}ms", sort_timer.elapsed().as_millis());
-    print_pretty("default unstable sort", &default_unstable_sorted);
-
+    print_pretty("default unstable sort", &sorted);
 
     let sort_timer = Instant::now();
-    let merge_sorted = sorting::merge_sort(vector.clone());
+    let sorted = sorting::merge_sort(vector.clone());
     println!("merge sort spent {}ms", sort_timer.elapsed().as_millis());
-    print_pretty("merge sort", &merge_sorted);
+    print_pretty("merge sort", &sorted);
 
     let sort_timer = Instant::now();
-    let quick_sorted = sorting::quicksort(vector.clone());
+    let sorted = sorting::quicksort(vector.clone());
     println!("quicksort spent {}ms", sort_timer.elapsed().as_millis());
-    print_pretty("quicksort", &quick_sorted);
+    print_pretty("quicksort", &sorted);
 
     let sort_timer = Instant::now();
-    let bubble_sorted = sorting::bubble_sort(vector.clone());
+    let sorted = sorting::quicksort_v2(vector.clone());
+    println!("quicksort v2 spent {}ms", sort_timer.elapsed().as_millis());
+    print_pretty("quicksort v2", &sorted);
+
+    let sort_timer = Instant::now();
+    let sorted = sorting::bubble_sort(vector.clone());
     println!("bubble sort spent {}ms", sort_timer.elapsed().as_millis());
-    print_pretty("bubble sort", &bubble_sorted);
+    print_pretty("bubble sort", &sorted);
 }
 
 fn get_vector_of_random_numbers(length: usize) -> Vec<i32> {

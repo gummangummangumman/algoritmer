@@ -9,13 +9,13 @@ pub fn default_sort(v: Vec<i32>) -> Vec<i32> {
 
 //Just the in-built rust unstable sorting algorithm
 pub fn default_unstable_sort(v: Vec<i32>) -> Vec<i32> {
-    let mut vec = v;
+    let mut vec: Vec<i32> = v;
     vec.sort_unstable();
     vec
 }
 
 pub fn bubble_sort(v: Vec<i32>) -> Vec<i32> {
-    let mut vec = v;
+    let mut vec: Vec<i32> = v;
     if vec.len() <= 1 {
         return vec;
     }
@@ -40,7 +40,7 @@ pub fn bubble_sort(v: Vec<i32>) -> Vec<i32> {
 }
 
 pub fn merge_sort(v: Vec<i32>) -> Vec<i32> {
-    let vec = v;
+    let vec: Vec<i32> = v;
     if vec.len() <= 1 {
         return vec;
     }
@@ -54,7 +54,7 @@ pub fn merge_sort(v: Vec<i32>) -> Vec<i32> {
 }
 
 fn merge(l: Vec<i32>, r: Vec<i32>) -> Vec<i32> {
-    let mut vec = Vec::with_capacity(l.len() + r.len());
+    let mut vec: Vec<i32> = Vec::with_capacity(l.len() + r.len());
     //converting left and right to VecDeques to use pop_front
     let (mut left, mut right) = (VecDeque::new(), VecDeque::new());
     left.extend(l);
@@ -89,4 +89,29 @@ pub fn quicksort(v: Vec<i32>) -> Vec<i32> {
     left = quicksort(left);
     right = quicksort(right);
     left.into_iter().chain(vec![pivot]).chain(right).collect()
-} 
+}
+
+// optimised version - passing by reference and using indices instead of creating new vectors
+pub fn quicksort_v2(v: Vec<i32>) -> Vec<i32> {
+    let mut vec: Vec<i32> = v;
+    quicksort_recursive(&mut vec);
+    vec
+}
+
+fn quicksort_recursive(v: &mut [i32]) {
+    if v.len() <= 1 {
+        return;
+    }
+    let pivot: i32 = v[0];
+    let mut i = 0;
+    for j in 1..v.len() {
+        if v[j] < pivot {
+            i += 1;
+            v.swap(i, j);
+        }
+    }
+    v.swap(0, i);
+    quicksort_recursive(&mut v[..i]);
+    quicksort_recursive(&mut v[(i + 1)..]);
+}
+
